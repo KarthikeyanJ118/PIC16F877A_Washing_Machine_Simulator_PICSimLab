@@ -1,0 +1,2 @@
+# PIC16F877A-Washing-Machine-Simulator-Embedded-C-PICSimLab
+Designed and implemented a washing machine controller using the PIC16F877A microcontroller in Embedded C. The system uses a Finite State Machine (FSM) to automate the complete washing cycle, including fill, wash, rinse, spin, and drain operations. The project was simulated in PicsimLab to validate functionality before hardware implementation.
