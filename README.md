@@ -1,49 +1,261 @@
-# Washing Machine Simulator using PIC16F877A
+# 🧺 Washing Machine Simulator using PIC16F877A
 
-## ➢ Project Overview
-This project is a functional simulation of a washing machine control system. Developed using the **PIC16F877A** microcontroller, it simulates various wash cycles, water level management, and timing controls. The system utilizes a **Finite State Machine (FSM)** approach to manage different states like Power On, Function Selection, and Operation.
+> A microcontroller-based washing machine simulation developed using the **PIC16F877A**. The project demonstrates the implementation of an **Embedded Finite State Machine (FSM)** to control washing operations such as program selection, water level management, washing, rinsing, spinning, and cycle completion.
 
-## ➢ Key Features
-* **Multiple Wash Programs:** Pre-set modes for Daily, Heavy, Delicates, and Whites.
-* **User Interface:** Integrated **16x2 CLCD** for real-time status updates and cycle countdowns.
-* **Control Inputs:** Tactile switches for program selection, start/pause, and water level settings.
-* **Automated Cycle Management:** * **Wash/Rinse/Spin:** Sequenced stages with dedicated timers.
-    * **Door Sensing:** Safety simulation that pauses the operation if the door is "opened."
-* **Buzzer Alerts:** Audio notifications for cycle completion and error states.
+---
 
-## ➢ Technical Stack
-* **Microcontroller:** PIC16F877A
-* **Development Tools:** MPLAB X IDE, XC8 Compiler
-* **Simulation Environment:** PICSimLab
-* **Peripherals used:** Timers (Timer2 for PWM/Clock), External Interrupts, 16x2 CLCD, Tactile Switches, DC Motor (to simulate the drum).
-* **Language:** Embedded C
+## 📖 Project Overview
 
-## ➢ System Logic (State Machine)
-1.  **Power On State:** Displays a welcome message and waits for user input.
-2.  **Selection State:** User chooses the wash program and water level.
-3.  **Running State:** Activates the motor and starts the countdown timer based on the selected program.
-4.  **Pause State:** Temporarily stops the timer and motor via external interrupts.
-5.  **Completion State:** Triggers the buzzer and resets the system to the initial state.
+This project simulates the working of an automatic washing machine using the **PIC16F877A** microcontroller. The system provides multiple wash programs, configurable water levels, and timer-based cycle management. A **16×2 Character LCD (CLCD)** displays the current operating state, while tactile switches allow users to interact with the system.
 
-## ➢ Setup & Installation
-1.  **Compile:** Build the project in **MPLAB X IDE** to generate the `main.hex` file.
-2.  **Simulate:** * Open **PICSimLab** and select the **PICGenius** board.
-    * Set the processor to **PIC16F877A**.
-    * Load the `.hex` file.
-3.  **Interact:** Use the digital switches to select modes and the onboard LCD to monitor the progress.
+The firmware is developed in **Embedded C** using **MPLAB X IDE** and **XC8 Compiler**, and tested using **PICSimLab**.
 
-## ➢ Visual Walkthrough (Simulation Screens)
+---
 
-<table>
-  <tr>
-    <td><b>1. Powering On</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/powering_on_screen.png?raw=true" width="250"></td>
-    <td><b>2. Program Selection</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/washing_programs_screen_1.png?raw=true" width="250"></td>
-    <td><b>3. Water Level Setup</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/water_level_screen_1.png?raw=true" width="250"></td>
-  </tr>
-  <tr>
-    <td><b>4. Cycle Running</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/program_and_time_display.png?raw=true" width="250"></td>
-    <td><b>5. Start/Stop Control</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/start_stop_screen.png?raw=true" width="250"></td>
-    <td><b>6. Paused State</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/program_paused_screen.png?raw=true" width="250"></td>
-  </tr>
-</table>
-<p align="center"><b>7. Program Complete</b><br><img src="https://github.com/Pranowmya/Washing-Machine-Simulation-/blob/main/program_complete_screen.png?raw=true" width="400"></p>
+## ✨ Features
+
+* 🧺 Multiple washing programs (Daily, Heavy, Delicates, Whites)
+* 💧 Adjustable water level selection
+* ⏱️ Timer-based wash cycle management
+* 📺 16×2 CLCD for real-time status display
+* 🔘 Push-button user interface
+* 🚪 Door safety simulation
+* ⏸️ Start, Pause and Resume functionality
+* 🔔 Buzzer notification on cycle completion
+* ⚙️ Finite State Machine (FSM) based control logic
+
+---
+
+## 🛠 Hardware Requirements
+
+| Component           | Description             |
+| ------------------- | ----------------------- |
+| 🧠 PIC16F877A       | Microcontroller         |
+| 📺 16×2 CLCD        | Display Module          |
+| 🔘 Tactile Switches | User Inputs             |
+| ⚙️ DC Motor         | Washing Drum Simulation |
+| 🔔 Buzzer           | Audio Notification      |
+| 🔋 Power Supply     | 5V                      |
+| 🔌 Connecting Wires | Circuit Connections     |
+
+---
+
+## 💻 Software Requirements
+
+* 🖥️ MPLAB X IDE
+* ⚙️ XC8 Compiler
+* 🔬 PICSimLab
+* 💻 Embedded C
+
+---
+
+## ⚙️ System Workflow
+
+### 🔹 Power ON
+
+* Display welcome message
+* Initialize peripherals
+
+### 🔹 Program Selection
+
+* Choose washing mode
+* Select water level
+
+### 🔹 Washing Cycle
+
+* Start motor
+* Display remaining time
+* Monitor system status
+
+### 🔹 Pause Mode
+
+* Pause timer
+* Stop motor safely
+
+### 🔹 Completion
+
+* Stop motor
+* Activate buzzer
+* Display **Program Complete**
+* Return to Home Screen
+
+---
+
+## 🔄 Finite State Machine (FSM)
+
+```text
+Power ON
+     │
+     ▼
+Program Selection
+     │
+     ▼
+Water Level Selection
+     │
+     ▼
+Start Program
+     │
+     ▼
+Wash
+     │
+     ▼
+Rinse
+     │
+     ▼
+Spin
+     │
+     ▼
+Program Complete
+     │
+     ▼
+Return to Home
+```
+
+---
+
+## 📂 Project Structure
+
+```text
+Washing-Machine-Simulator/
+│
+├── 📄 README.md
+├── 📂 Source_Code/
+│   ├── main.c
+│   ├── lcd.c
+│   ├── keypad.c
+│   ├── timer.c
+│   ├── interrupt.c
+│   ├── washing_machine.c
+│   └── config_bits.c
+│
+├── 📂 Header_Files/
+│   ├── lcd.h
+│   ├── keypad.h
+│   ├── timer.h
+│   ├── interrupt.h
+│   └── washing_machine.h
+│
+├── 📂 Simulation/
+│   ├── WashingMachine.hex
+│   └── WashingMachine.pzw
+│
+├── 📂 Images/
+│   ├── powering_on_screen.png
+│   ├── washing_programs_screen.png
+│   ├── water_level_screen.png
+│   ├── program_running.png
+│   ├── pause_screen.png
+│   └── program_complete.png
+│
+└── 📜 LICENSE
+```
+
+---
+
+## 🚀 Setup & Installation
+
+### 1️⃣ Build the Project
+
+* Open the project in **MPLAB X IDE**
+* Select **PIC16F877A**
+* Build the project using **XC8 Compiler**
+* Generate the `.hex` file
+
+### 2️⃣ Run Simulation
+
+* Open **PICSimLab**
+* Select **PICGenios** board
+* Choose **PIC16F877A**
+* Load the generated `.hex` file
+
+### 3️⃣ Test the System
+
+* Select a washing program
+* Choose water level
+* Start the cycle
+* Observe LCD status and timer
+* Pause/Resume using switches
+* Wait for completion notification
+
+---
+
+## 🖼 Simulation Screens
+
+### 🔋 Power ON
+
+<img src="images/powering_on_screen.png" width="350">
+
+### 🧺 Program Selection
+
+<img src="images/washing_programs_screen_1.png" width="350">
+
+### 💧 Water Level Selection
+
+<img src="images/water_level_screen_1.png" width="350">
+
+### ⏱ Running Program
+
+<img src="images/program_and_time_display.png" width="350">
+
+### ⏸ Pause State
+
+<img src="images/program_paused_screen.png" width="350">
+
+### ✅ Program Complete
+
+<img src="images/program_complete_screen.png" width="350">
+
+---
+
+## 📚 Learning Outcomes
+
+* Embedded C Programming
+* PIC16F877A Programming
+* MPLAB X IDE
+* XC8 Compiler
+* Finite State Machine (FSM)
+* Timer Programming
+* Interrupt Handling
+* LCD Interfacing
+* Switch Debouncing
+* Embedded System Design
+* Hardware Simulation using PICSimLab
+
+---
+
+## 🎯 Applications
+
+* 🧺 Home Appliance Automation
+* 🏭 Embedded Control Systems
+* 🎓 Academic Mini Projects
+* 💼 Embedded Firmware Learning
+* 🧪 Industrial Process Simulation
+
+---
+
+## 🔮 Future Enhancements
+
+* 🌡 Temperature Sensor Integration
+* 📶 IoT Monitoring using ESP32
+* 📱 Mobile Application Control
+* ☁ Cloud Data Logging
+* 💦 Automatic Water Level Detection
+* ⚡ Energy Consumption Monitoring
+
+---
+
+## 👨‍💻 Author
+
+**Karthikeyan J**
+
+🎓 B.E. Electronics and Communication Engineering
+
+💼 Embedded Systems | Embedded C | Firmware Development | PIC Microcontrollers | IoT
+
+---
+
+## 📄 License
+
+This project is developed for **educational and learning purposes**.
+
+⭐ If you found this project useful, consider giving it a **Star** on GitHub!
